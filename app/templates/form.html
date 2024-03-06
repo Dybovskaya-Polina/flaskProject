@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Forma</title>
+    {% from 'bootstrap5/form.html'import render_form %}
+    {{ bootstrap.load_css()}}
+    {{ bootstrap.load_js() }}
+
+</head>
+<body>
+<h1> What: {% if text  %}{{ text }}{% else %}Nothing{% endif %}</h1>
+<form method="post">
+
+
+</form>
+</body>
+</html>
