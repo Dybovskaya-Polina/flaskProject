@@ -16,7 +16,7 @@ def index():
 
 @app.route('/error')
 def error():
-    return render_template('error.html'), 401
+    return render_template('error.html'), 403
 
 
 @app.errorhandler(404)
