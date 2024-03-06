@@ -1,0 +1,10 @@
+.form.invalid {
+	display: inline-block;
+	background: #FF9898;
+}
+.form.invalid-feedback {
+	color: #CC0000;
+}
+.form{
+color: #CC0000;
+}

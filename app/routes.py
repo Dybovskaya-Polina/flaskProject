@@ -24,14 +24,8 @@ def page_not_found(e):
     return render_template("error.html"), 404
 
 
-@app.route('/form', methods=['GET','POST'])
+@app.route('/form', methods=["GET","POST"])
 def forma():
     text = None
     form = ContactForm()
-    '''
-    if form.validate_on_submit():
-        session['text'] = form.text.data
-        form.text.data = ''
-        return redirect(url_for('index'))
-        '''
-    return render_template('form.html', form=form, text=text)
+    return render_template('form.html', form=form)

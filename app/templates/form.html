@@ -1,19 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+ {% extends 'base.html' %}
 
-    <title>Forma</title>
-    {% from 'bootstrap5/form.html'import render_form %}
-    {{ bootstrap.load_css()}}
-    {{ bootstrap.load_js() }}
+{% block content %}
 
-</head>
-<body>
-<h1> !!!!What: {% if text  %}{{ text }}{% else %}Nothing{% endif %}</h1>
-<form method="post">
+<form method="post" class="form">
+{{ form.hidden_tag() }}
 
+{% for field in form if field.name not in ['csrf_token', 'submit'] -%}
+	<p>{{ field.label() }} 
+	{% if field.errors %}
+		{{ field(class="invalid") }}
+	<span class="invalid-feedback">
+		{% for e in field.errors %}
+		{{ e }}
+		{% endfor %}
+	</span>
+	{% else %}
+		{{ field() }}
+	{% endif %}
+{% endfor %}
 
+<p>{{ form.submit() }}
 </form>
-</body>
-</html>
+{% endblock %}
