@@ -7,11 +7,11 @@ from app import app
 @app.route('/index')
 def index():
     def_user = 'friend'
-    session_info = session.get('text')
+    session_info = session.get('name')
     if session_info is None:
-        return render_template('index.html', text=def_user)
+        return render_template('index.html', name=def_user)
     else:
-        return render_template('index.html', text=session_info)
+        return render_template('index.html', name=session_info)
 
 @app.route('/error')
 def error():
@@ -26,10 +26,10 @@ def page_not_found(e):
 
 @app.route('/form', methods=['GET','POST'])
 def testForm():
-    text = None
+    name = None
     form = ContactForm()
     if form.validate_on_submit():
-        session['text'] = form.text.data
-        form.text.data = ''
+        session['name'] = form.name.data
+        form.name.data = ''
         return redirect(url_for('index'))
-    return render_template('form.html', form=form, text=text)
+    return render_template('form.html', form=form, name=name)
