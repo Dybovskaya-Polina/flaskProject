@@ -13,7 +13,6 @@ def index():
     else:
         return render_template('index.html', text=session_info)
 
-
 @app.route('/error')
 def error():
     return render_template('error.html'), 403
@@ -24,8 +23,13 @@ def page_not_found(e):
     return render_template("error.html"), 404
 
 
-@app.route('/form', methods=["GET","POST"])
-def forma():
+
+@app.route('/form', methods=['GET','POST'])
+def testForm():
     text = None
     form = ContactForm()
-    return render_template('form.html', form=form)
+    if form.validate_on_submit():
+        session['text'] = form.text.data
+        form.text.data = ''
+        return redirect(url_for('index'))
+    return render_template('form.html', form=form, text=text)
