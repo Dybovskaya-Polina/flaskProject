@@ -2,10 +2,99 @@
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 {% block content %}
-<center>
-<form method="post" class="form">
 
-{{ form.hidden_tag() }}
+<section class="p-3 p-md-4 p-xl-5" >
+  <div class="container" >
+    <div class="row justify-content-center">
+      <div class="col-8 col-xxl-8">
+        <div class="card border-light-subtle shadow-sm">
+          <div class="row g-0  font-monospace">
+            <div class="col-12 col-md-6">
+              <img class="img-fluid rounded-start w-100 h-100 object-fit-cover" loading="lazy" src="/static/s.jpg" alt="Welcome back you've been missed!">
+            </div>
+            <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
+              <div class="col-12 col-lg-11 col-xl-10">
+                <div class="card-body p-3 p-md-4 p-xl-5">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="mb-5">
+
+                        <h4 class="text-center">Welcome back you've been missed!</h4>
+                      </div>
+                    </div>
+                  </div>
+                  <form method="post" class="form">
+                    {{ form.hidden_tag() }}
+                    <div class="row gy-3 overflow-hidden">
+                      <div class="col-12">
+                        <div >
+                          {{form.name.label}}
+                          <br>
+                          {{form.name}}
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div >
+                          {{form.email.label}}
+                          <br>
+                          {{form.email}}
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div >
+                          {{form.psw.label}}
+                          <br>
+                          {{form.psw}}
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div >
+                          {{form.psw2.label}}
+                          <br>
+                          {{form.psw2}}
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" name="remember_me" id="remember_me">
+                          <label class="form-check-label text-secondary" for="remember_me">
+                            Keep me logged in
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="d-grid">
+                          {{form.submit()}}
+                        </div>
+                      </div>
+                    </div>
+                    {% for field,errors in form.errors.items() %}
+	                  <ul>
+                      {% for error in errors %}
+                      <p>{{error}}</p>
+                      {% endfor %}
+                      </ul>
+                    {% endfor %}
+                  </form>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-center mt-5">
+                        <a href="#!" class="link-secondary text-decoration-none">Create new account</a>
+                        <a href="#!" class="link-secondary text-decoration-none">Forgot password</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+	<!--
 {% for field in form if field.name not in ['csrf_token', 'submit'] -%}
 	<p>{{ field.label() }} 
 	{% if field.errors %}
@@ -20,6 +109,28 @@
 	{% endif %}
 {% endfor %}
 <p>{{ form.submit() }}
-</form>
+<center>
+
+
+
+	{{form.name.label}}{{form.name}}
+	<br>
+	{{form.email.label}}{{form.email}}
+	<br>
+	{{form.psw.label}}{{form.psw}}
+	<br>
+	{{form.psw2.label}}{{form.psw2}}
+	<br>
+
+	{% for field,errors in form.errors.items() %}
+	<ul>
+		{% for error in errors %}
+		<p>{{error}}</p>
+		{% endfor %}
+	</ul>
+	{% endfor %}
+	</form>
 	</center>
+-->
+
 {% endblock %}

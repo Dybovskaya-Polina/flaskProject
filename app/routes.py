@@ -6,12 +6,13 @@ from app import app
 @app.route('/')
 @app.route('/index')
 def index():
-    def_user = 'friend'
+    def_user = 'a friend'
     session_info = session.get('name')
     if session_info is None:
         return render_template('index.html', name=def_user)
     else:
         return render_template('index.html', name=session_info)
+
 
 @app.route('/error')
 def error():
@@ -23,8 +24,7 @@ def page_not_found(e):
     return render_template("error.html"), 404
 
 
-
-@app.route('/form', methods=['GET','POST'])
+@app.route('/form', methods=['GET', 'POST'])
 def testForm():
     name = None
     form = ContactForm()
