@@ -26,34 +26,25 @@
                   <form method="post" class="form">
                     {{ form.hidden_tag() }}
                     <div class="row gy-3 overflow-hidden">
+                      {% for field in form if field.name not in ['csrf_token', 'remember', 'submit'] -%}
                       <div class="col-12">
                         <div >
-                          {{form.name.label}}
+                         {{ field.label() }}
                           <br>
-                          {{form.name}}
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <div >
-                          {{form.email.label}}
-                          <br>
-                          {{form.email}}
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <div >
-                          {{form.psw.label}}
-                          <br>
-                          {{form.psw}}
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <div >
-                          {{form.psw2.label}}
-                          <br>
-                          {{form.psw2}}
-                        </div>
-                      </div>
+                         {% if field.errors %}
+                          {{ field() }}
+                           <span>
+                             {% for e in field.errors %}
+                             {{ e }}
+                             {% endfor %}
+                           </span>
+                             {% else %}
+                                {{ field() }}
+                             {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+
                       <div class="col-12">
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" value="" name="remember_me" id="remember_me">
@@ -68,13 +59,7 @@
                         </div>
                       </div>
                     </div>
-                    {% for field,errors in form.errors.items() %}
-	                  <ul>
-                      {% for error in errors %}
-                      <p>{{error}}</p>
-                      {% endfor %}
-                      </ul>
-                    {% endfor %}
+
                   </form>
                   <div class="row">
                     <div class="col-12">
@@ -94,43 +79,6 @@
   </div>
 
 </section>
-	<!--
-{% for field in form if field.name not in ['csrf_token', 'submit'] -%}
-	<p>{{ field.label() }} 
-	{% if field.errors %}
-		{{ field(class="invalid") }}
-	<span class="invalid-feedback">
-		{% for e in field.errors %}
-		{{ e }}
-		{% endfor %}
-	</span>
-	{% else %}
-		{{ field() }}
-	{% endif %}
-{% endfor %}
-<p>{{ form.submit() }}
-<center>
 
-
-
-	{{form.name.label}}{{form.name}}
-	<br>
-	{{form.email.label}}{{form.email}}
-	<br>
-	{{form.psw.label}}{{form.psw}}
-	<br>
-	{{form.psw2.label}}{{form.psw2}}
-	<br>
-
-	{% for field,errors in form.errors.items() %}
-	<ul>
-		{% for error in errors %}
-		<p>{{error}}</p>
-		{% endfor %}
-	</ul>
-	{% endfor %}
-	</form>
-	</center>
--->
 
 {% endblock %}
