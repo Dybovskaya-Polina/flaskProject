@@ -2,7 +2,17 @@
 {% block content %}
 <center>
     <h1>Hiiiiiiiiiiiiiiii my friend!</h1>
-    <h3>You are {{ name }}</h3>
+    <h3>You are a friend</h3>
+    <ul>
+	{% for u in list %}
+	<li><p>id: {{u.id}}, email: {{u.email}}</p>
+	<ul>
+	<li>Имя: {{u.pr.name}}</li>
+	<li>Город: {{u.pr.city}}</li>
+	</ul>
+	</li>
+{% endfor %}
+</ul>
 </center>
 
 {% endblock %}

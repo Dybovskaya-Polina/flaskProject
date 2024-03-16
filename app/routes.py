@@ -1,29 +1,43 @@
-from flask import render_template, session, redirect, url_for
+
+from flask import render_template, session, redirect, url_for, request
+from werkzeug.security import generate_password_hash
+from models import Users,Profiles
 from app.forms import ContactForm
-from app import app
+from app import app, db
 
 
 @app.route('/')
 @app.route('/index')
 def index():
-    def_user = 'a friend'
-    session_info = session.get('name')
-    if session_info is None:
-        return render_template('index.html', name=def_user)
-    else:
-        return render_template('index.html', name=session_info)
+    info = []
+    try:
+        info = Users.query.all()
+    except:
+        print("Ошибка чтения из БД")
+    return render_template('index.html',list=info)
 
 
-@app.route('/error')
-def error():
-    return render_template('error.html'), 403
+
+@app.route('/register', methods=['POST','GET'])
+def register():
+    if request.method == 'POST':
+        try:
+            hash = generate_password_hash(request.form['psw'])
+            u = Users(email=request.form['email'], psw=hash)
+            db.session.add(u)
+            db.sessiion.flush()
+            p = Profiles(name=request.form['name'], city=request.form['city'], user_id=u.id)
+            db.session.add(p)
+            db.session.commit()
+        except:
+            db.session.rollback()
+            print('error in db')
+        return redirect(url_for('index'))
+
+    return render_template('form2.html')
 
 
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template("error.html"), 404
-
-
+'''
 @app.route('/form', methods=['GET', 'POST'])
 def testForm():
     name = None
@@ -33,3 +47,13 @@ def testForm():
         form.name.data = ''
         return redirect(url_for('index'))
     return render_template('form.html', form=form, name=name)
+'''
+@app.route('/error')
+def error():
+    return render_template('error.html'), 403
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("error.html"), 404
+
