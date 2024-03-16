@@ -23,11 +23,11 @@ def register():
     if request.method == 'POST':
         try:
             hash = generate_password_hash(request.form['psw'])
-            u = Users(email=request.form['email'], psw=hash)
+            u = Users(email=request.form['email'], psw=hash)#not work
             print(u,hash)
             db.session.add(u)
             db.sessiion.flush()
-            p = Profiles(name=request.form['name'], city=request.form['city'], user_id=u.id)
+            p = Profiles(name=request.form['name'], city=request.form['city'], user_id=u.id)#not work
             db.session.add(p)
             db.session.commit()
         except:
