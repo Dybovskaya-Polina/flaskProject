@@ -8,7 +8,7 @@ class Users(db.Model):
     psw = db.Column(db.String(500), nullable=True)
     date = db.Column(db.DateTime, default=datetime.utcnow)
 
-
+    pr = db.relationship('Profiles', backref='users', uselist=False)
 
     def __repr__(self):
         return f"<users {self.id}>"

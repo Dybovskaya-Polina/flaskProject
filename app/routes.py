@@ -24,6 +24,7 @@ def register():
         try:
             hash = generate_password_hash(request.form['psw'])
             u = Users(email=request.form['email'], psw=hash)
+            print(u,hash)
             db.session.add(u)
             db.sessiion.flush()
             p = Profiles(name=request.form['name'], city=request.form['city'], user_id=u.id)
