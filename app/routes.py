@@ -26,10 +26,11 @@ def register():
             u = Users(email=request.form['email'], psw=hash)#not work
             print(u,hash)
             db.session.add(u)
-            db.sessiion.flush()
+            db.session.commit()
             p = Profiles(name=request.form['name'], city=request.form['city'], user_id=u.id)#not work
             db.session.add(p)
             db.session.commit()
+            print(u,p)
         except:
             db.session.rollback()
             print('error in db')
