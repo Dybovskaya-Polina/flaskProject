@@ -6,12 +6,13 @@
 
 	{% for u in list %}
 		<li>id: {{u.id}} </li>
-		<li>email: {{u.email}}</li>
-	<ul>
-	<li>Имя: {{u.pr.name}}</li>
-	<li>Город: {{u.pr.city}}</li>
-	</ul>
+		<p>email: {{u.email}}</p>
+
+	<p>Имя: {{u.pr.name}}</p>
+	<p>Город: {{u.pr.city}}</p>
+
 	</li>
+	<p></p>
 {% endfor %}
 
 </center>

@@ -1,9 +1,10 @@
+from mailbox import Message
 
 from flask import render_template, session, redirect, url_for, request
 from werkzeug.security import generate_password_hash
 from models import Users,Profiles
 from app.forms import ContactForm
-from app import app, db
+from app import app, db,mail
 
 
 @app.route('/')
@@ -24,16 +25,25 @@ def register():
         try:
             hash = generate_password_hash(request.form['psw'])
             u = Users(email=request.form['email'], psw=hash)#not work
-            print(u,hash)
+            email1 = request.form['email']
             db.session.add(u)
             db.session.commit()
-            p = Profiles(name=request.form['name'], city=request.form['city'], user_id=u.id)#not work
+            p = Profiles(name=request.form['name'], city=request.form['city'], user_id=u.id)  # not work
             db.session.add(p)
             db.session.commit()
             print(u,p)
+            if request.form.get('send')=='True':
+                try:
+                    msg = Message('Subject', sender=app.config['MAIL_USERNAME'], recipients=[email1])
+                    msg.html = render_template('email.html', name='Project')
+                    mail.send(msg)
+                    print('Email sent!')
+                except:
+                    print('чето с почтой')
         except:
             db.session.rollback()
             print('error in db')
+            print(error)
         return redirect(url_for('index'))
 
     return render_template('form2.html')

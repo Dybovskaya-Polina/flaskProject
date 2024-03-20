@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 
 from flask_sqlalchemy import SQLAlchemy
-
+from flask_mail import *
 from flask import Flask
 from flask_wtf import CSRFProtect
 
@@ -19,10 +19,20 @@ from flask_bootstrap5 import Bootstrap
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
 
+mail = Mail(app)
+MAIL_SERVER = 'smtp.example.com'
+MAIL_PORT = 587
+MAIL_USE_TLS = True
+MAIL_USERNAME = 'rambler124413@gmail.com'
+MAIL_PASSWORD = 'vkru wwgm rjpy aabf'
+
+
 from app import routes
 from models import Users, Profiles
 
 '''
+
+
 class Users(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
