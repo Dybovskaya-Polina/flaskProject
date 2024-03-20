@@ -19,13 +19,13 @@ from flask_bootstrap5 import Bootstrap
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
 
-mail = Mail(app)
-MAIL_SERVER = 'smtp.example.com'
-MAIL_PORT = 587
-MAIL_USE_TLS = True
-MAIL_USERNAME = 'rambler124413@gmail.com'
-MAIL_PASSWORD = 'vkru wwgm rjpy aabf'
 
+app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
+app.config['MAIL_PORT']= 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'rambler124413@gmail.com'
+app.config['MAIL_PASSWORD'] = 'vkru wwgm rjpy aabf'
+mail = Mail(app)
 
 from app import routes
 from models import Users, Profiles
